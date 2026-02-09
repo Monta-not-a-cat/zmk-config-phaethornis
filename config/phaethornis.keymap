@@ -286,8 +286,6 @@
 &lt 6 Q            &lt 6 X            &kp C           &altgr_v_hash   &kp M      &kp COMMA  &kp DOT                  &kp P
                                          &sk LEFT_SHIFT  &lt 3 TAB  &kp SPACE  &mt RIGHT_ALT BACKSPACE
             >;
-
-            sensor-bindings = <&mouse_scrll_v>;
         };
 
         super_odk {
@@ -298,8 +296,6 @@
 &odk Q  &odk Z  &kp RA(Z)  &odk V  &kp SLASH  &odk COMMA  &odk DOT                 &odk P
                  &osl 2  &kp TAB    &odk SPACE  &mt RIGHT_ALT BACKSPACE
             >;
-
-            sensor-bindings = <&mouse_scrll_v>;
         };
 
         super_odk_shift {
@@ -310,8 +306,6 @@
 &sodk Q  &sodk Z  &kp LS(RA(Z))  &sodk V    &kp LS(SLASH)  &sodk COMMA    &sodk DOT                &sodk P
                     &osl 2     &kp TAB        &sodk SPACE    &mt RIGHT_ALT BACKSPACE
             >;
-
-            sensor-bindings = <&mouse_scrll_v>;
         };
 
         num_nav {
@@ -321,8 +315,6 @@
 &none  &kp LC(Z)       &none           &kp LC(P)   &kp NUMBER_1  &kp NUMBER_2      &kp NUMBER_3             &kp KP_DOT
                        &kp LSHFT   &kp TAB       &lt 4 SPACE       &mt RIGHT_ALT BACKSPACE
             >;
-
-            sensor-bindings = <&mouse_scroll_h>;
         };
 
         func {
@@ -332,8 +324,6 @@
 &kp F11  &kp F7  &kp F8  &kp F9     &none    &none      &none               &none
                  &kp LSHFT  &kp TAB  &kp SPACE  &mt RALT BACKSPACE
             >;
-
-            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
         };
 
         params {
@@ -343,8 +333,6 @@
 &none  &none  &none  &none         &none  &none  &none  &none
               &none  &none         &none  &none 
             >;
-
-            sensor-bindings = <&mouse_scrll_v>;
         };
     };
 };
