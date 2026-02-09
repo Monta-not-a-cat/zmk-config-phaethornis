@@ -1,18 +1,350 @@
+#include <dt-bindings/zmk/mouse.h>
+#include <dt-bindings/zmk/input_transform.h>
+#include <behaviors/mouse_keys.dtsi>
+
+#define MS LSHFT
+#define MA LALT
+#define MC LCTL
+
+#include <zephyr/dt-bindings/input/input-event-codes.h>
 #include <behaviors.dtsi>
+#include <dt-bindings/zmk/bt.h>
 #include <dt-bindings/zmk/keys.h>
 
+#define LAYER_BASE          0
+#define LAYER_ODK           1
+#define LAYER_ODK_SHIFT     2
+#define LAYER_NUMNAV        3
+#define LAYER_NUM_ROW       4
+#define LAYER_FUNC          5
+#define LAYER_PARAM         6
+
 / {
+
+    behaviors {
+        HMR_R: HMR_R {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HMR_R";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            flavor = "balanced";
+            hold-trigger-key-positions = <0 1 2 3 8 9 10 11 12 18 19 20 21 26 27 28 29 30>;
+            hold-trigger-on-release;
+            require-prior-idle-ms = <210>;
+        };
+
+        HRM_L: HRM_L {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HRM_L";
+            bindings = <&kp>, <&kp>;
+
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            quick-tap-ms = <175>;
+            hold-trigger-on-release;
+            hold-trigger-key-positions = <4 5 6 7 13 14 15 16 17 22 23 24 25 29 30 28 27 26>;
+            flavor = "balanced";
+            require-prior-idle-ms = <210>;
+        };
+
+        osm: one_shot_modifier {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings =
+                <&macro_param_1to1>,
+                <&macro_tap>,
+                <&sk MACRO_PLACEHOLDER>;
+        };
+
+        osl: one_shot_layer {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings =
+                <&macro_param_1to1>,
+                <&macro_tap>,
+                <&sl MACRO_PLACEHOLDER>;
+        };
+
+        // I mean, it wants everything at the same time
+
+        bls: bisexual_layer_switch {
+            compatible = "zmk,behavior-hold-tap";
+            #binding-cells = <2>;
+            tapping-term-ms = <200>;
+            flavor = "tap-preferred";
+            bindings = <&mo>, <&osl>;
+        };
+
+        dead_key: dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&bls 1 1>, <&kp O>;
+
+            mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI)>;
+            keep-mods = <(MOD_LSFT|MOD_RSFT|MOD_RALT|MOD_LGUI|MOD_LCTL)>;
+        };
+
+        nsodk: no_shift_one_dead_key {
+            compatible = "zmk,behavior-mod-morph";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&kp O>;
+
+            mods = <(MOD_LSFT)>;
+        };
+
+        q_ctrl_z: q_ctrl_z {
+            compatible = "zmk,behavior-mod-morph";
+            label = "Q_CTRL_Z";
+            bindings = <&kp Q>, <&kp Z>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RCTL|MOD_LCTL)>;
+            keep-mods = <(MOD_LCTL|MOD_RCTL)>;
+        };
+
+        altgr_v_hash: altgr_v_hash {
+            compatible = "zmk,behavior-mod-morph";
+            label = "ALTGR_V_HASH";
+            bindings = <&kp V>, <&kp RA(B)>;
+
+            #binding-cells = <0>;
+            mods = <(MOD_RALT)>;
+        };
+    };
+
+    macros {
+        odk: one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings =
+                <&macro_tap>,
+                <&nsodk &macro_param_1to1>,
+                <&macro_tap>,
+                <&kp MACRO_PLACEHOLDER>;
+        };
+
+        sodk: shifted_one_dead_key {
+            compatible = "zmk,behavior-macro-one-param";
+            #binding-cells = <1>;
+            tap-ms = <0>;
+            wait-ms = <0>;
+            bindings =
+                <&macro_tap>,
+                <&nsodk>,
+                <&macro_press>,
+                <&kp LSHFT &macro_param_1to1>,
+                <&macro_tap>,
+                <&kp MACRO_PLACEHOLDER>,
+                <&macro_release>,
+                <&kp LSHFT>;
+        };
+    };
+
+    combos {
+        compatible = "zmk,combos";
+
+        enter {
+            bindings = <&kp ENTER>;
+            key-positions = <16 15 14>;
+        };
+
+        printscreen {
+            bindings = <&kp PRINTSCREEN>;
+            key-positions = <21 19 10>;
+            require-prior-idle-ms = <250>;
+        };
+
+        capslock {
+            bindings = <&kp CAPSLOCK>;
+            key-positions = <3 4>;
+            require-prior-idle-ms = <250>;
+        };
+
+        kp_divide {
+            bindings = <&kp KP_DIVIDE>;
+            key-positions = <6 15>;
+            layers = <3>;
+            require-prior-idle-ms = <250>;
+        };
+
+        kp_mult {
+            bindings = <&kp KP_ASTERISK>;
+            key-positions = <15 23>;
+            layers = <3>;
+            require-prior-idle-ms = <250>;
+        };
+
+        shift_tab {
+            bindings = <&kp LS(TAB)>;
+            key-positions = <27 28>;
+            layers = <0>;
+            require-prior-idle-ms = <250>;
+        };
+
+        ctrl_backspace {
+            bindings = <&kp LC(BACKSPACE)>;
+            key-positions = <30 29>;
+            layers = <0>;
+            require-prior-idle-ms = <250>;
+        };
+
+        scroll_layer {
+            bindings = <&mo 8>;
+            key-positions = <19 20>;
+            layers = <0>;
+            require-prior-idle-ms = <250>;
+        };
+
+        kp_q {
+            bindings = <&kp Q>;
+            key-positions = <9 0>;
+            layers = <0>;
+        };
+
+        odk_q {
+            bindings = <&odk Q>;
+            key-positions = <9 0>;
+            layers = <1>;
+        };
+
+        sodk_q {
+            bindings = <&odk Q>;
+            key-positions = <9 0>;
+            layers = <2>;
+        };
+
+        kp_y {
+            bindings = <&kp P>;
+            key-positions = <16 7>;
+            layers = <0>;
+        };
+
+        odk_y {
+            bindings = <&odk P>;
+            key-positions = <16 7>;
+            layers = <1>;
+        };
+
+        sodk_y {
+            bindings = <&odk P>;
+            key-positions = <16 7>;
+            layers = <2>;
+        };
+
+        backspace {
+            bindings = <&kp BACKSPACE>;
+            key-positions = <6 7>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <20>;
+        };
+
+        tab {
+            bindings = <&kp TAB>;
+            key-positions = <9 10>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <20>;
+        };
+
+        esc {
+            bindings = <&kp ESCAPE>;
+            key-positions = <1 0>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <20>;
+        };
+
+        numpad_plus {
+            bindings = <&kp KP_PLUS>;
+            key-positions = <16 24>;
+            require-prior-idle-ms = <250>;
+            layers = <3>;
+        };
+
+        numpad_minus {
+            bindings = <&kp KP_MINUS>;
+            key-positions = <16 7>;
+            require-prior-idle-ms = <250>;
+            layers = <3>;
+        };
+    };
+
     keymap {
         compatible = "zmk,keymap";
 
         default_layer {
-            display-name = "Base";
             bindings = <
-                &kp A &kp B &kp C &kp D &kp E &kp F &kp G &kp H
-                &kp I &kp J &kp K &kp L &kp M &kp N &kp O &kp P &kp Q &kp R
-                &kp S &kp T &kp U &kp V &kp W &kp X &kp Y &kp Z
-                &kp A &kp B &kp C &kp D
+&kp W              &kp E              &kp R           &kp T           &kp N      &kp U      &kp I                    &dead_key
+&HRM_L LEFT_GUI A  &HRM_L LEFT_ALT S  &HRM_L LCTRL D  &HRM_L LSHFT F  &kp G      &kp H      &HMR_R RSHIFT J          &HMR_R RCTRL K  &HMR_R LEFT_ALT L  &HMR_R RGUI SEMI
+&lt 6 Q            &lt 6 X            &kp C           &altgr_v_hash   &kp M      &kp COMMA  &kp DOT                  &kp P
+                                         &sk LEFT_SHIFT  &lt 3 TAB  &kp SPACE  &mt RIGHT_ALT BACKSPACE
             >;
+
+            sensor-bindings = <&mouse_scrll_v>;
+        };
+
+        super_odk {
+            display-name = "SuperOneDeadKey";
+            bindings = <
+&odk W  &odk E  &odk R     &kp Z   &odk N     &kp Y       &odk I                   &odk O
+&odk A  &odk S  &odk D     &odk F  &kp B      &kp RA(Y)   &odk PERIOD              &odk K  &odk L  &odk SEMI
+&odk Q  &odk Z  &kp RA(Z)  &odk V  &kp SLASH  &odk COMMA  &odk DOT                 &odk P
+                 &osl 2  &kp TAB    &odk SPACE  &mt RIGHT_ALT BACKSPACE
+            >;
+
+            sensor-bindings = <&mouse_scrll_v>;
+        };
+
+        super_odk_shift {
+            display-name = "SuperOneDeadKeyShifted";
+            bindings = <
+&sodk W  &sodk E  &sodk R        &kp LS(Z)  &sodk N        &kp LS(Y)      &sodk I                  &sodk O
+&sodk A  &sodk S  &sodk D        &sodk F    &kp LS(B)      &kp RA(LS(Y))  &sodk PERIOD             &sodk K  &sodk L  &sodk SEMI
+&sodk Q  &sodk Z  &kp LS(RA(Z))  &sodk V    &kp LS(SLASH)  &sodk COMMA    &sodk DOT                &sodk P
+                    &osl 2     &kp TAB        &sodk SPACE    &mt RIGHT_ALT BACKSPACE
+            >;
+
+            sensor-bindings = <&mouse_scrll_v>;
+        };
+
+        num_nav {
+            bindings = <
+&none  &kp UP_ARROW    &none           &kp DELETE  &odk N0       &kp N7            &kp N8                   &kp N9
+&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT   &none         &kp LS(NUMBER_1)  &HMR_R RSHFT NUMBER_4    &HMR_R RCTRL N5  &HMR_R LALT NUMBER_6  &HMR_R RMETA N0
+&none  &kp LC(Z)       &none           &kp LC(P)   &kp NUMBER_1  &kp NUMBER_2      &kp NUMBER_3             &kp KP_DOT
+                       &kp LSHFT   &kp TAB       &lt 4 SPACE       &mt RIGHT_ALT BACKSPACE
+            >;
+
+            sensor-bindings = <&mouse_scroll_h>;
+        };
+
+        func {
+            bindings = <
+&kp F1   &kp F2  &kp F3  &kp F12    &none    &none      &none               &none
+&kp F10  &kp F4  &kp F5  &kp F6     &none    &none      &kp RSHIFT          &kp RCTRL  &kp LEFT_ALT  &kp RGUI
+&kp F11  &kp F7  &kp F8  &kp F9     &none    &none      &none               &none
+                 &kp LSHFT  &kp TAB  &kp SPACE  &mt RALT BACKSPACE
+            >;
+
+            sensor-bindings = <&inc_dec_kp LC(PAGE_UP) LC(PAGE_DOWN)>;
+        };
+
+        params {
+            bindings = <
+&none  &none  &none  &bt BT_SEL 0  &none  &none  &none  &none
+&none  &none  &none  &none         &none  &none  &none  &none  &none  &none
+&none  &none  &none  &none         &none  &none  &none  &none
+              &none  &none         &none  &none 
+            >;
+
+            sensor-bindings = <&mouse_scrll_v>;
         };
     };
 };
