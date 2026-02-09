@@ -1,0 +1,40 @@
+#include <physical_layouts.dtsi>
+
+/ {
+    physical_layout_phaethornis: physical_layout_phaethornis {
+        compatible = "zmk,physical-layout";
+        display-name = "phaethornis";
+        keys  //                     w   h    x    y     rot    rx    ry
+            = <&key_physical_attrs 100 100  107   41  (-600)   157    91>
+            , <&key_physical_attrs 100 100  217    3  (-300)   267    53>
+            , <&key_physical_attrs 100 100  330   30       0     0     0>
+            , <&key_physical_attrs 100 100  430   80       0     0     0>
+            , <&key_physical_attrs 100 100  751   80       0     0     0>
+            , <&key_physical_attrs 100 100  852   30       0     0     0>
+            , <&key_physical_attrs 100 100  965    3     300  1015    53>
+            , <&key_physical_attrs 100 100 1075   41     600  1125    91>
+            , <&key_physical_attrs 100 100    9  189 (-1200)    59   239>
+            , <&key_physical_attrs 100 100  118  141  (-600)   168   191>
+            , <&key_physical_attrs 100 100  222  103  (-300)   272   153>
+            , <&key_physical_attrs 100 100  330  130       0     0     0>
+            , <&key_physical_attrs 100 100  430  180       0     0     0>
+            , <&key_physical_attrs 100 100  751  180       0     0     0>
+            , <&key_physical_attrs 100 100  852  130       0     0     0>
+            , <&key_physical_attrs 100 100  960  103     300  1010   153>
+            , <&key_physical_attrs 100 100 1064  141     600  1114   191>
+            , <&key_physical_attrs 100 100 1173  189    1200  1223   239>
+            , <&key_physical_attrs 100 100   30  287 (-1200)    80   337>
+            , <&key_physical_attrs 100 100  128  241  (-600)   178   291>
+            , <&key_physical_attrs 100 100  227  203  (-300)   277   253>
+            , <&key_physical_attrs 100 100  330  230       0     0     0>
+            , <&key_physical_attrs 100 100  852  230       0     0     0>
+            , <&key_physical_attrs 100 100  955  203     300  1005   253>
+            , <&key_physical_attrs 100 100 1054  241     600  1104   291>
+            , <&key_physical_attrs 100 100 1152  287    1200  1202   337>
+            , <&key_physical_attrs 100 100  378  350    2000   428   400>
+            , <&key_physical_attrs 100 100  472  385    2000   523   435>
+            , <&key_physical_attrs 100 100  709  385 (-2000)   759   435>
+            , <&key_physical_attrs 100 100  804  350 (-2000)   854   400>
+            ;
+    };
+};
