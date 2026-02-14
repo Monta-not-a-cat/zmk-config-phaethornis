@@ -20,7 +20,6 @@
 #define LAYER_PARAM         6
 
 / {
-
     behaviors {
         HMR_R: HMR_R {
             compatible = "zmk,behavior-hold-tap";
@@ -155,6 +154,8 @@
         enter {
             bindings = <&kp ENTER>;
             key-positions = <16 15 14>;
+            require-prior-idle-ms = <200>;
+            timeout-ms = <20>;
         };
 
         printscreen {
@@ -165,43 +166,40 @@
 
         capslock {
             bindings = <&kp CAPSLOCK>;
-            key-positions = <3 4>;
+            key-positions = <20 21>;
             require-prior-idle-ms = <250>;
+            timeout-ms = <20>;
         };
 
         kp_divide {
             bindings = <&kp KP_DIVIDE>;
             key-positions = <6 15>;
             layers = <3>;
-            require-prior-idle-ms = <250>;
+            require-prior-idle-ms = <200>;
+            timeout-ms = <20>;
         };
 
         kp_mult {
             bindings = <&kp KP_ASTERISK>;
             key-positions = <15 23>;
             layers = <3>;
-            require-prior-idle-ms = <250>;
+            require-prior-idle-ms = <200>;
+            timeout-ms = <20>;
         };
 
         shift_tab {
             bindings = <&kp LS(TAB)>;
-            key-positions = <27 28>;
+            key-positions = <27 26>;
             layers = <0>;
             require-prior-idle-ms = <250>;
         };
 
         ctrl_backspace {
             bindings = <&kp LC(BACKSPACE)>;
-            key-positions = <30 29>;
+            key-positions = <30 29 28>;
             layers = <0>;
-            require-prior-idle-ms = <250>;
-        };
-
-        scroll_layer {
-            bindings = <&mo 8>;
-            key-positions = <19 20>;
-            layers = <0>;
-            require-prior-idle-ms = <250>;
+            require-prior-idle-ms = <200>;
+            timeout-ms = <20>;
         };
 
         kp_q {
@@ -251,28 +249,30 @@
             bindings = <&kp TAB>;
             key-positions = <9 10>;
             require-prior-idle-ms = <0>;
-            timeout-ms = <20>;
+            timeout-ms = <15>;
         };
 
         esc {
             bindings = <&kp ESCAPE>;
             key-positions = <1 0>;
             require-prior-idle-ms = <0>;
-            timeout-ms = <20>;
+            timeout-ms = <15>;
         };
 
         numpad_plus {
             bindings = <&kp KP_PLUS>;
             key-positions = <16 24>;
-            require-prior-idle-ms = <250>;
+            require-prior-idle-ms = <200>;
             layers = <3>;
+            timeout-ms = <20>;
         };
 
         numpad_minus {
             bindings = <&kp KP_MINUS>;
             key-positions = <16 7>;
-            require-prior-idle-ms = <250>;
+            require-prior-idle-ms = <200>;
             layers = <3>;
+            timeout-ms = <20>;
         };
     };
 
@@ -281,57 +281,57 @@
 
         default_layer {
             bindings = <
-&kp W              &kp E              &kp R           &kp T           &kp N      &kp U      &kp I                    &dead_key
+                   &kp W              &kp E           &kp R           &kp T      &kp N      &kp U                    &kp I           &dead_key
 &HRM_L LEFT_GUI A  &HRM_L LEFT_ALT S  &HRM_L LCTRL D  &HRM_L LSHFT F  &kp G      &kp H      &HMR_R RSHIFT J          &HMR_R RCTRL K  &HMR_R LEFT_ALT L  &HMR_R RGUI SEMI
-&lt 6 Q            &lt 6 X            &kp C           &altgr_v_hash   &kp M      &kp COMMA  &kp DOT                  &kp P
-                                         &sk LEFT_SHIFT  &lt 3 TAB  &kp SPACE  &mt RIGHT_ALT BACKSPACE
+&lt 6 Q            &lt 6 X            &kp C           &altgr_v_hash                         &kp M                    &kp COMMA       &kp DOT            &kp P
+                                                      &sk LEFT_SHIFT  &lt 3 TAB  &kp SPACE  &mt RIGHT_ALT BACKSPACE
             >;
         };
 
         super_odk {
             display-name = "SuperOneDeadKey";
             bindings = <
-&odk W  &odk E  &odk R     &kp Z   &odk N     &kp Y       &odk I                   &odk O
-&odk A  &odk S  &odk D     &odk F  &kp B      &kp RA(Y)   &odk PERIOD              &odk K  &odk L  &odk SEMI
-&odk Q  &odk Z  &kp RA(Z)  &odk V  &kp SLASH  &odk COMMA  &odk DOT                 &odk P
-                 &osl 2  &kp TAB    &odk SPACE  &mt RIGHT_ALT BACKSPACE
+        &odk W  &odk E     &odk R  &kp Z    &odk N      &kp Y                    &odk I      &odk O
+&odk A  &odk S  &odk D     &odk F  &kp B    &kp RA(Y)   &odk PERIOD              &odk K      &odk L    &odk SEMI
+&odk Q  &odk Z  &kp RA(Z)  &odk V                       &kp SLASH                &odk COMMA  &odk DOT  &odk P
+                           &osl 2  &kp TAB  &odk SPACE  &mt RIGHT_ALT BACKSPACE
             >;
         };
 
         super_odk_shift {
             display-name = "SuperOneDeadKeyShifted";
             bindings = <
-&sodk W  &sodk E  &sodk R        &kp LS(Z)  &sodk N        &kp LS(Y)      &sodk I                  &sodk O
-&sodk A  &sodk S  &sodk D        &sodk F    &kp LS(B)      &kp RA(LS(Y))  &sodk PERIOD             &sodk K  &sodk L  &sodk SEMI
-&sodk Q  &sodk Z  &kp LS(RA(Z))  &sodk V    &kp LS(SLASH)  &sodk COMMA    &sodk DOT                &sodk P
-                    &osl 2     &kp TAB        &sodk SPACE    &mt RIGHT_ALT BACKSPACE
+         &sodk W  &sodk E        &sodk R  &kp LS(Z)  &sodk N        &kp LS(Y)                &sodk I      &sodk O
+&sodk A  &sodk S  &sodk D        &sodk F  &kp LS(B)  &kp RA(LS(Y))  &sodk PERIOD             &sodk K      &sodk L    &sodk SEMI
+&sodk Q  &sodk Z  &kp LS(RA(Z))  &sodk V                            &kp LS(SLASH)            &sodk COMMA  &sodk DOT  &sodk P
+                                 &osl 2   &kp TAB    &sodk SPACE    &mt RIGHT_ALT BACKSPACE
             >;
         };
 
         num_nav {
             bindings = <
-&none  &kp UP_ARROW    &none           &kp DELETE  &odk N0       &kp N7            &kp N8                   &kp N9
-&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT   &none         &kp LS(NUMBER_1)  &HMR_R RSHFT NUMBER_4    &HMR_R RCTRL N5  &HMR_R LALT NUMBER_6  &HMR_R RMETA N0
-&none  &kp LC(Z)       &none           &kp LC(P)   &kp NUMBER_1  &kp NUMBER_2      &kp NUMBER_3             &kp KP_DOT
-                       &kp LSHFT   &kp TAB       &lt 4 SPACE       &mt RIGHT_ALT BACKSPACE
+       &none           &kp UP_ARROW    &none      &kp DELETE  &odk N0           &kp N7                   &kp N8           &kp N9
+&none  &kp LEFT_ARROW  &kp DOWN_ARROW  &kp RIGHT  &none       &kp LS(NUMBER_1)  &HMR_R RSHFT NUMBER_4    &HMR_R RCTRL N5  &HMR_R LALT NUMBER_6  &HMR_R RMETA N0
+&none  &kp LC(Z)       &none           &kp LC(P)                                &kp NUMBER_1             &kp NUMBER_2     &kp NUMBER_3          &kp KP_DOT
+                                       &kp LSHFT  &kp TAB     &lt 4 SPACE       &mt RIGHT_ALT BACKSPACE
             >;
         };
 
         func {
             bindings = <
-&kp F1   &kp F2  &kp F3  &kp F12    &none    &none      &none               &none
+         &kp F1  &kp F2  &kp F3     &kp F12  &none      &none               &none      &none
 &kp F10  &kp F4  &kp F5  &kp F6     &none    &none      &kp RSHIFT          &kp RCTRL  &kp LEFT_ALT  &kp RGUI
-&kp F11  &kp F7  &kp F8  &kp F9     &none    &none      &none               &none
-                 &kp LSHFT  &kp TAB  &kp SPACE  &mt RALT BACKSPACE
+&kp F11  &kp F7  &kp F8  &kp F9                         &none               &none      &none         &none
+                         &kp LSHFT  &kp TAB  &kp SPACE  &mt RALT BACKSPACE
             >;
         };
 
         params {
             bindings = <
-&none  &none  &none  &bt BT_SEL 0  &none  &none  &none  &none
-&none  &none  &none  &none         &none  &none  &none  &none  &none  &none
-&none  &none  &none  &none         &none  &none  &none  &none
-              &none  &none         &none  &none 
+       &none  &none  &none  &bt BT_SEL 0  &none  &none  &none  &none
+&none  &none  &none  &none  &none         &none  &none  &none  &none  &none
+&none  &none  &none  &none                       &none  &none  &none  &none
+                     &none  &none         &none  &none
             >;
         };
     };
