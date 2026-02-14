@@ -98,16 +98,6 @@
             mods = <(MOD_LSFT)>;
         };
 
-        q_ctrl_z: q_ctrl_z {
-            compatible = "zmk,behavior-mod-morph";
-            label = "Q_CTRL_Z";
-            bindings = <&kp Q>, <&kp Z>;
-
-            #binding-cells = <0>;
-            mods = <(MOD_RCTL|MOD_LCTL)>;
-            keep-mods = <(MOD_LCTL|MOD_RCTL)>;
-        };
-
         altgr_v_hash: altgr_v_hash {
             compatible = "zmk,behavior-mod-morph";
             label = "ALTGR_V_HASH";
