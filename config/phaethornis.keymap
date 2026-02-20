@@ -144,8 +144,8 @@
         enter {
             bindings = <&kp ENTER>;
             key-positions = <16 15 14>;
-            require-prior-idle-ms = <200>;
-            timeout-ms = <20>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <15>;
         };
 
         printscreen {
@@ -157,39 +157,24 @@
         capslock {
             bindings = <&kp CAPSLOCK>;
             key-positions = <20 21>;
-            require-prior-idle-ms = <250>;
-            timeout-ms = <20>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <15>;
         };
 
         kp_divide {
             bindings = <&kp KP_DIVIDE>;
             key-positions = <6 15>;
             layers = <3>;
-            require-prior-idle-ms = <200>;
-            timeout-ms = <20>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <15>;
         };
 
         kp_mult {
             bindings = <&kp KP_ASTERISK>;
             key-positions = <15 23>;
             layers = <3>;
-            require-prior-idle-ms = <200>;
-            timeout-ms = <20>;
-        };
-
-        shift_tab {
-            bindings = <&kp LS(TAB)>;
-            key-positions = <27 26>;
-            layers = <0>;
-            require-prior-idle-ms = <250>;
-        };
-
-        ctrl_backspace {
-            bindings = <&kp LC(BACKSPACE)>;
-            key-positions = <30 29 28>;
-            layers = <0>;
-            require-prior-idle-ms = <200>;
-            timeout-ms = <20>;
+            require-prior-idle-ms = <0>;
+            timeout-ms = <15>;
         };
 
         kp_q {
@@ -230,9 +215,9 @@
 
         backspace {
             bindings = <&kp BACKSPACE>;
-            key-positions = <6 7>;
+            key-positions = <15 16>;
             require-prior-idle-ms = <0>;
-            timeout-ms = <20>;
+            timeout-ms = <15>;
         };
 
         tab {
@@ -252,17 +237,31 @@
         numpad_plus {
             bindings = <&kp KP_PLUS>;
             key-positions = <16 24>;
-            require-prior-idle-ms = <200>;
+            require-prior-idle-ms = <0>;
             layers = <3>;
-            timeout-ms = <20>;
+            timeout-ms = <15>;
         };
 
         numpad_minus {
             bindings = <&kp KP_MINUS>;
             key-positions = <16 7>;
-            require-prior-idle-ms = <200>;
+            require-prior-idle-ms = <0>;
             layers = <3>;
-            timeout-ms = <20>;
+            timeout-ms = <15>;
+        };
+
+        shift_tab {
+            bindings = <&kp LS(TAB)>;
+            key-positions = <9 10>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <0>;
+        };
+
+        ctrl_backspace {
+            bindings = <&kp LC(BACKSPACE)>;
+            key-positions = <6 7>;
+            timeout-ms = <15>;
+            require-prior-idle-ms = <0>;
         };
     };
 
